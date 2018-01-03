@@ -1,0 +1,72 @@
+{% extends 'default.html.twig' %}
+{% block body %}
+    <h1>Gestion des membres</h1>
+
+    <div style="display: inline-block">
+        <div id="div_chart" style="display: inline-block" class="col-md-3 col-xs-3 col-lg-3"></div>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+            {{ gc_draw(piechart, 'div_chart') }}
+        </script>
+        </div>
+
+        <div id="div_chartM" style="display: inline-block" class="col-md-3 col-xs-3 col-lg-3"></div>
+        <script type="text/javascript">
+            {{ gc_draw(piechartM, 'div_chartM') }}
+        </script>
+        </div>
+
+        <div id="div_chartY" style="display: inline-block" class="col-md-3 col-xs-3 col-lg-3"></div>
+        <script type="text/javascript">
+            {{ gc_draw(piechartY, 'div_chartY') }}
+        </script>
+        </div>
+
+    </div>
+    <div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Derniere connection</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for user in users %}
+                {% if user.id == 1 %}
+
+                {% else %}
+                <tr>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>
+                        {% if user.dateConnexion == null%}
+                            Compte non validée
+                        {% else %}
+                            {# {{ infos_precise_sur_date }} #}
+                            {% if user.mois != null %}
+                                <span class="text-danger">Le {{ user.dateConnexion.date|date("d F Y à H:i:s") }} </span>
+                            {% else %}
+                                <span class="text-success">Le {{ user.dateConnexion.date|date("d F Y à H:i:s") }} </span>
+                            {% endif %}
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{{ path('admins.delete', {id: user.id}) }}" class="btn btn-secondary">Delete</a>
+                        {% if user.mois != null %}
+                            <a href="{{ path('admins.email_co', {id: user.id}) }}" class="btn btn-secondary">Envoi Mail Rappel Connexion</a>
+                        {% endif %}
+                        {% if user.statusCompte != '1' %}
+                            <a href="{{ path('admins.email_rappel_validation_compte', {id: user.id}) }}" class="btn btn-secondary">Email Rappel Validation Compte</a>
+                        {% endif %}
+                        <a href="{{ path('admins.email', {id: user.id}) }}" class="btn btn-secondary">Contact</a>
+                    </td>
+                </tr>
+                {% endif %}
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

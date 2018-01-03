@@ -1,0 +1,17 @@
+{% extends 'default.html.twig' %}
+{% block body %}
+    <a href="{{ path('categories.index') }}" class="btn btn-default">Retour All Categories</a>
+    <a href="{{ path('questions.index_p_cat', {id: reponses[0].question.categorie.id}) }}" class="btn btn-default">Retour Question Categorie {{ reponses[0].question.categorie.name }}</a>
+    <ul>
+        <li>
+            <br/>La question c'est:
+            <br/>{{ reponses[0].question.question }}
+        </li>
+        <li>
+            </br>la reponse c'est:
+        </li>
+        <li>
+            <br/><ol>{{ reponses[0].reponse }}</ol> ou <ol>{{ reponses[1].reponse }}</ol> ou <ol>{{ reponses[2].reponse }}</ol>
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'default.html.twig' %}
+{% block body %}
+    {% if utilisateur != 0 %}
+        {% if utilisateur.id == 1 %}
+            <h1>Modifier {{ question.question }}</h1>
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            {{ form_end(form) }}
+            <a href="{{ path('questions.index_p_cat', {id: question.categorie.id}) }}" class="btn btn-default">Retour question {{ question.categorie.name }}</a>
+        {% endif %}
+        <a href="{{ path('questions.index_p_cat', {id: question.categorie.id}) }}" class="btn btn-default">Retour question {{ question.categorie.name }}</a>
+    {% endif %}
+{% endblock %}

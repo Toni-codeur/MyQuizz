@@ -1,0 +1,20 @@
+{% extends 'default.html.twig' %}
+{% block body %}
+    <h1>Choisissez une categories</h1>
+{{ dump(categories)}}
+    <ul>
+        {% for categorie in categories %}
+            <li><a href="{{ path('questions.index_p_cat', {id: categorie.id}) }}">{{ categorie.name }}</a></li>
+            {% if utilisateur is same as( 0 ) %}
+
+            {% else %}
+                {% if utilisateur.id == 1 %}
+                    <a href="{{ path('categories.edit', {id: categorie.id}) }}">Editer</a>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    </ul>
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+    {{ form_end(form) }}
+{% endblock %}

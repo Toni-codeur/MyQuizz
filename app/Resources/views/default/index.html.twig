@@ -1,0 +1,20 @@
+{% extends 'default.html.twig' %}
+{% block body %}
+    <h1>
+        {% if utilisateur is same as( 0 ) %}
+        Bienvenue
+        {% else %}
+            Bienvenue <span class="text-primary">{{ utilisateur.username }}</span>
+        {% endif %}
+    </h1>
+    {% if histo_user_quizz|length == 0 %}
+
+    {% else %}
+    <h2>Historique des Quizz passées</h2>
+    <ul>
+        {% for h in histo_user_quizz %}
+            <li>{{ h }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+{% endblock %}

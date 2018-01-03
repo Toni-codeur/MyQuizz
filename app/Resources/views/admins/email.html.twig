@@ -1,0 +1,10 @@
+{% extends 'default.html.twig' %}
+{% block body %}
+<h1>Infos membre</h1>
+    <h2>Name: {{ user.username }}</h2>
+    <h3>Email: {{ user.email }}</h3>
+    <p>Derniere connexion le:  {{ user.dateConnexion.date|date("d F Y à H:i:s") }} <br/> donc il y a {{ infosInnactif }}</p>
+    <h3>Envoi email automatique</h3>
+
+
+{% endblock %}

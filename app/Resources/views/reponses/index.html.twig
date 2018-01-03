@@ -1,0 +1,24 @@
+{% extends 'default.html.twig' %}
+{% block body %}
+    <a href="{{ path('categories.index') }}" class="btn btn-default">Retour Categories</a>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+    <ul>
+        {% for reponse in reponses %}
+            <li>
+                <br/>Id Question: {{ reponse.idQuestion }}
+                <br/>La question c'est:
+                <br/>{{ reponse.question.question }}
+                </br>la reponse c'est: {{ reponse.reponse }}
+            </li>
+            {% if utilisateur is same as( 0 ) %}
+
+            {% else %}
+                {% if utilisateur.id == 1 %}
+                    <a href="{{ path('reponses.edit', {id: reponse.id}) }}">Editer</a>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    </ul>
+{% endblock %}

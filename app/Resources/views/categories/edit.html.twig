@@ -1,0 +1,11 @@
+{% extends 'default.html.twig' %}
+{% block body %}
+        {% if utilisateur.id == 1 %}
+            <h1>Modifier {{ categorie.name }}</h1>
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            {{ form_end(form) }}
+            <a href="{{ path('categories.index') }}" class="btn btn-default">Retour Categories</a>
+        {% endif %}
+            <a href="{{ path('categories.index') }}" class="btn btn-default">Retour Categories</a>
+{% endblock %}

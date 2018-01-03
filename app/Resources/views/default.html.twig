@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>My Quizz</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <style>
+        .navbar{
+            margin-bottom: 2rem;
+        }
+        .text-right{
+            text-align: right;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+<nav class="navbar navbar-fixed-top navbar-toggleable-md navbar-inverse bg-primary">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <ul class="nav navbar-nav mr-auto">
+        <li class="nav-item active">
+            <a href="{{ path('homepage') }}" class="btn btn-secondary">Home</a>
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <a href="{{ path('users.index', {id: utilisateur.id}) }}" class="btn btn-success">Modif</a>
+                <a href="{{  logout_path() }}" class="btn btn-danger">Logout</a>
+            {% endif %}
+            {% if is_granted('IS_AUTHENTICATED_ANONYMOUSLY') %}
+                {% if utilisateur is same as( 0 ) %}
+                    <a href="{{ path('login') }}" class="btn btn-success">Login</a>
+                    <a href="{{ path('app_register_register') }}" class="btn btn-success">Register</a>
+                {% endif %}
+                {% if status_page == 0 %}
+                    <a href="{{ path('categories.index') }}" class="btn btn-warning">Go Quizz</a>
+                {% endif %}
+            {% endif %}
+            <a href="{{ path('users.create_quizz') }}" class="btn btn-secondary">Create Quizz</a>
+            {% if utilisateur is same as( 0 ) %}
+
+            {% else %}
+                {% if utilisateur.id == 1 %}
+                    <a href="{{ path('admins.index') }}" class="btn btn-secondary">Gestion membre</a>
+                {% endif %}
+            {% endif %}
+        </li>
+    </ul>
+    <ul class="navbar-nav">
+        <li class="nav-item active">
+        </li>
+    </ul>
+</nav>
+    {% block body %}{% endblock %}
+</div>
+</body>
+</html>

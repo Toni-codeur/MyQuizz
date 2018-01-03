@@ -1,0 +1,13 @@
+{% extends 'default.html.twig' %}
+{% block body %}
+    {% if utilisateur != 0 %}
+        {% if utilisateur.id == 1 %}
+            <h1>Modifier {{ reponse.reponse }}</h1>
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            {{ form_end(form) }}
+            <a href="{{ path('reponses.index') }}" class="btn btn-default">Retour reponse</a>
+        {% endif %}
+        <a href="{{ path('reponses.index') }}" class="btn btn-default">Retour reponse</a>
+    {% endif %}
+{% endblock %}

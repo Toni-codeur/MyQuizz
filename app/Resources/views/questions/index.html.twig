@@ -1,0 +1,39 @@
+{% extends 'default.html.twig' %}
+{% block body %}
+    <h1>Question Categorie <span class="text-primary">{{ questions[0].categorie.name }}</span></h1>
+    <a href="{{ path('categories.index') }}" class="btn btn-default">Retour Categories</a>
+    <ol>
+        <form action="{{ path('reponses.score') }}" method="post">
+            <input type="hidden" name="{{ questions[0].categorie.name }}" value="{{ questions[0].categorie.id }}">
+            {% for question in questions %}
+                <li>
+                    {{ question.question }}
+                    </br>
+                    {% for reponse in reponses %}
+                        <ul>
+                            {% if reponse.idQuestion == question.id %}
+
+                                <li>
+                                    <input type="radio" name="{{ question.id }}" value="{{ reponse.checkReponse }}">
+                                    {{ reponse.reponse }}
+                                </li>
+                            {% endif %}
+                        </ul>
+                    {% endfor %}
+                </li>
+                {% if utilisateur is same as( 0 ) %}
+
+                {% else %}
+                    {% if utilisateur.id == 1 %}
+                        <a href="{{ path('questions.edit', {id: question.id}) }}">Editer</a>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+            <button type="submit" value="Submit" class="btn btn-primary center-block btn-lg">Envoyer Reponse</button>
+        </form>
+    </ol>
+    <h2></br>Id categorie : {{ questions[0].idCategorie }}</h2>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+{% endblock %}
